@@ -514,8 +514,8 @@
       ]
     },
     "C:\\Users\\Onwuka Rosario\\blockchain\\realNftback\\contracts\\Nft.sol": {
-      "lastModificationDate": 1680794770038,
-      "contentHash": "695b1b699a5c2aa5dc760bca5c04a442",
+      "lastModificationDate": 1680803693935,
+      "contentHash": "618d6d5830d484bb64c63d674133e1c2",
       "sourceName": "contracts/Nft.sol",
       "solcConfig": {
         "version": "0.8.17",

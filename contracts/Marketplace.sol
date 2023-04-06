@@ -97,12 +97,16 @@ contract Marketplace is ReentrancyGuard {
         );
     }
 
-    function listNFT(IERC721 _nft, uint _tokenId, uint _price) external nonReentrant {
+    function listNFT(uint _itemId) external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
-        // increment itemCount
-        itemCount ++;
-        // transfer nft
-        _nft.transferFrom(msg.sender, address(this), _tokenId);
+        Item storage item = items[_itemId];
+        require(_itemId > 0 && _itemId <= itemCount, "item doesn't exist");
+        require(msg.value >= _totalPrice, "not enough ether to cover item price and market fee");
+        
+        // transfer nft to marketplace
+        // transfer nft to buyer
+        item.nft.transferFrom(address(this), msg.sender, item.tokenId);
+        
         // add new item to items mapping
         items[itemCount] = Item (
             itemCount,
@@ -122,7 +126,7 @@ contract Marketplace is ReentrancyGuard {
             msg.sender
         );
     }
-    
+     
     function getTotalPrice(uint _itemId) view public returns(uint){
         return((items[_itemId].price*(100 + feePercent))/100);
     }
