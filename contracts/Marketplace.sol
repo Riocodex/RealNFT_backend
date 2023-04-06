@@ -96,7 +96,35 @@ contract Marketplace is ReentrancyGuard {
             msg.sender
         );
     }
+
+    function listNFT(IERC721 _nft, uint _tokenId, uint _price) external nonReentrant {
+        require(_price > 0, "Price must be greater than zero");
+        // increment itemCount
+        itemCount ++;
+        // transfer nft
+        _nft.transferFrom(msg.sender, address(this), _tokenId);
+        // add new item to items mapping
+        items[itemCount] = Item (
+            itemCount,
+            _nft,
+            _tokenId,
+            _price,
+            payable(msg.sender),
+            false
+        );
+      
+        // emit Offered event
+        emit Offered(
+            itemCount,
+            address(_nft),
+            _tokenId,
+            _price,
+            msg.sender
+        );
+    }
+    
     function getTotalPrice(uint _itemId) view public returns(uint){
         return((items[_itemId].price*(100 + feePercent))/100);
     }
+   
 }
