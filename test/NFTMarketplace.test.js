@@ -141,6 +141,11 @@ describe("NFTMarketplace", function () {
       // The buyer should now own the nft
       expect(await nft.ownerOf(1)).to.equal(addr2.address);
     })
+
+    it("should be able to be listed when buyer wants to list nft",async function(){
+
+    })
+    
     it("Should fail for invalid item ids, sold items and when not enough ether is paid", async function () {
       // fails for invalid item ids
       await expect(

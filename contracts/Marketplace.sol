@@ -96,36 +96,31 @@ contract Marketplace is ReentrancyGuard {
             msg.sender
         );
     }
-
-    function listNFT(uint _itemId) external nonReentrant {
-        require(_price > 0, "Price must be greater than zero");
-        Item storage item = items[_itemId];
-        require(_itemId > 0 && _itemId <= itemCount, "item doesn't exist");
-        require(msg.value >= _totalPrice, "not enough ether to cover item price and market fee");
-        
-        // transfer nft to marketplace
-        // transfer nft to buyer
-        item.nft.transferFrom(address(this), msg.sender, item.tokenId);
-        
-        // add new item to items mapping
-        items[itemCount] = Item (
-            itemCount,
-            _nft,
-            _tokenId,
-            _price,
-            payable(msg.sender),
-            false
-        );
-      
-        // emit Offered event
-        emit Offered(
-            itemCount,
-            address(_nft),
-            _tokenId,
-            _price,
-            msg.sender
-        );
-    }
+//  // List NFT that was bought or created
+//  function listNFT(IERC721 _nft, uint _tokenId, uint _price) external nonReentrant {
+//     require(_price > 0, "Price must be greater than zero");
+//     // increment itemCount
+//     itemCount ++;
+//     // transfer nft
+//     _nft.transferFrom(msg.sender, address(this), _tokenId);
+//     // add new item to items mapping
+//     items[itemCount] = Item (
+//         itemCount,
+//         _nft,
+//         _tokenId,
+//         _price,
+//         payable(msg.sender),
+//         false
+//     );
+//     // emit Listed event
+//     emit Listed(
+//         itemCount,
+//         address(_nft),
+//         _tokenId,
+//         _price,
+//         msg.sender
+//     );
+// }
      
     function getTotalPrice(uint _itemId) view public returns(uint){
         return((items[_itemId].price*(100 + feePercent))/100);
