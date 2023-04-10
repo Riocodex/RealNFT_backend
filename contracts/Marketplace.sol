@@ -13,6 +13,7 @@ contract Marketplace is ReentrancyGuard {
     address payable public immutable feeAccount; // the account that receives fees
     uint public immutable feePercent; // the fee percentage on sales 
     uint public itemCount; 
+    string tester = "hello";
 
     struct Item {
         uint itemId;
@@ -98,5 +99,8 @@ contract Marketplace is ReentrancyGuard {
     }
     function getTotalPrice(uint _itemId) view public returns(uint){
         return((items[_itemId].price*(100 + feePercent))/100);
+    }
+    function getString()view public returns(string memory){
+        return tester;
     }
 }
