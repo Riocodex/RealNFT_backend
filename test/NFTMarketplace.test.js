@@ -36,8 +36,8 @@ describe("NFTMarketplace", function () {
       const nftSymbol = "RNFT"
       expect(await nft.name()).to.equal(nftName);
       expect(await nft.symbol()).to.equal(nftSymbol);
-      const itemCount = await marketplace.itemCount()
-      console.log(itemCount)
+      const hello = await marketplace.getString()
+      console.log(hello)
     });
 
     it("Should track feeAccount and feePercent of the marketplace", async function () {
